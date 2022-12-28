@@ -12,10 +12,10 @@
 		E0C55D2F295A2E69009EF445 /* MyGames.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D2D295A2E69009EF445 /* MyGames.xcdatamodeld */; };
 		E0C55D31295A2E6B009EF445 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0C55D30295A2E6B009EF445 /* Assets.xcassets */; };
 		E0C55D34295A2E6B009EF445 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0C55D32295A2E6B009EF445 /* LaunchScreen.storyboard */; };
-		E0C55D3F295A3945009EF445 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D3E295A3945009EF445 /* ViewController.swift */; };
-		E0C55D41295A3B26009EF445 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D40295A3B26009EF445 /* SecondViewController.swift */; };
-		E0C55D43295A3B90009EF445 /* tableviewcontrollerr.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D42295A3B90009EF445 /* tableviewcontrollerr.swift */; };
-		E0C55D46295A3BBD009EF445 /* TableVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D45295A3BBD009EF445 /* TableVIewCell.swift */; };
+		E0C55D43295A3B90009EF445 /* ListGamesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D42295A3B90009EF445 /* ListGamesTableViewController.swift */; };
+		E0C55D46295A3BBD009EF445 /* ListGameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D45295A3BBD009EF445 /* ListGameViewCell.swift */; };
+		E0C55D48295BD574009EF445 /* ListPlatformsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */; };
+		E0C55D4A295BD5BF009EF445 /* ListPlatformsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D49295BD5BF009EF445 /* ListPlatformsViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,10 +26,10 @@
 		E0C55D30295A2E6B009EF445 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0C55D33295A2E6B009EF445 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0C55D35295A2E6B009EF445 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E0C55D3E295A3945009EF445 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E0C55D40295A3B26009EF445 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		E0C55D42295A3B90009EF445 /* tableviewcontrollerr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableviewcontrollerr.swift; sourceTree = "<group>"; };
-		E0C55D45295A3BBD009EF445 /* TableVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableVIewCell.swift; sourceTree = "<group>"; };
+		E0C55D42295A3B90009EF445 /* ListGamesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGamesTableViewController.swift; sourceTree = "<group>"; };
+		E0C55D45295A3BBD009EF445 /* ListGameViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameViewCell.swift; sourceTree = "<group>"; };
+		E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlatformsTableViewController.swift; sourceTree = "<group>"; };
+		E0C55D49295BD5BF009EF445 /* ListPlatformsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlatformsViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +93,8 @@
 		E0C55D3D295A2EC7009EF445 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E0C55D3E295A3945009EF445 /* ViewController.swift */,
-				E0C55D40295A3B26009EF445 /* SecondViewController.swift */,
-				E0C55D42295A3B90009EF445 /* tableviewcontrollerr.swift */,
+				E0C55D42295A3B90009EF445 /* ListGamesTableViewController.swift */,
+				E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -103,7 +102,8 @@
 		E0C55D44295A3BA2009EF445 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				E0C55D45295A3BBD009EF445 /* TableVIewCell.swift */,
+				E0C55D45295A3BBD009EF445 /* ListGameViewCell.swift */,
+				E0C55D49295BD5BF009EF445 /* ListPlatformsViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -180,10 +180,10 @@
 			files = (
 				E0C55D25295A2E69009EF445 /* AppDelegate.swift in Sources */,
 				E0C55D27295A2E69009EF445 /* SceneDelegate.swift in Sources */,
-				E0C55D43295A3B90009EF445 /* tableviewcontrollerr.swift in Sources */,
-				E0C55D3F295A3945009EF445 /* ViewController.swift in Sources */,
-				E0C55D41295A3B26009EF445 /* SecondViewController.swift in Sources */,
-				E0C55D46295A3BBD009EF445 /* TableVIewCell.swift in Sources */,
+				E0C55D43295A3B90009EF445 /* ListGamesTableViewController.swift in Sources */,
+				E0C55D46295A3BBD009EF445 /* ListGameViewCell.swift in Sources */,
+				E0C55D48295BD574009EF445 /* ListPlatformsTableViewController.swift in Sources */,
+				E0C55D4A295BD5BF009EF445 /* ListPlatformsViewCell.swift in Sources */,
 				E0C55D2F295A2E69009EF445 /* MyGames.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

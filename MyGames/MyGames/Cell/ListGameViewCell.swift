@@ -7,10 +7,9 @@
 
 import UIKit
 
-final class TableVIewCell: UITableViewCell {
+final class ListGameViewCell: UITableViewCell {
     
-    static let identifier = String(describing: TableVIewCell.self)
-    
+    static let identifier = String(describing: ListGameViewCell.self)
     
     private lazy var mainHStack: UIStackView = {
         let stack = UIStackView()
@@ -19,7 +18,6 @@ final class TableVIewCell: UITableViewCell {
         stack.enableCode()
         return stack
     }()
-    
     
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
@@ -93,7 +91,6 @@ final class TableVIewCell: UITableViewCell {
             mainHStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
             
             imageGame.widthAnchor.constraint(equalToConstant: 50),
-            
         ])
     }
     

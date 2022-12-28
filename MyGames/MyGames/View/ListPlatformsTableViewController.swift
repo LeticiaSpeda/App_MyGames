@@ -1,27 +1,25 @@
 //
-//  tableviewcontrollerr.swift
+//  ListPlatformsTableViewController.swift
 //  MyGames
 //
-//  Created by Leticia Speda on 26/12/22.
+//  Created by Leticia Speda on 27/12/22.
 //
 
 import UIKit
 
-final class tableviewcontrollerr: UITableViewController {
-    
+final class ListPlatformsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
-        tableView.register(TableVIewCell.self, forCellReuseIdentifier: TableVIewCell.identifier)
+        tableView.register(ListPlatformsViewCell.self, forCellReuseIdentifier: ListPlatformsViewCell.identifier)
         configureStyle()
-        
     }
     
     private func configureStyle() {
         view.backgroundColor = .white
-        navigationItem.title = "Lista de Jogos"
+        navigationItem.title = "Lista de Plataforma"
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "main")
+        appearance.backgroundColor = UIColor(named: "second")
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue
@@ -32,8 +30,7 @@ final class tableviewcontrollerr: UITableViewController {
     
     override func tableView(_ tableView: UITableView,cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: TableVIewCell.identifier, for: indexPath) as? TableVIewCell {
-            
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ListPlatformsViewCell.identifier, for: indexPath) as? ListPlatformsViewCell {
             
             return cell
         }
