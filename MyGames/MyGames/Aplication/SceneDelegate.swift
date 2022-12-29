@@ -18,10 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        let controller = ListPlatformsTableViewController(style: .grouped)
-        let navigation = UINavigationController(rootViewController: controller)
+        let controller = ListsTabBarController()
         let safeWindow = UIWindow(windowScene: windowScene)
-        safeWindow.rootViewController = navigation
+        safeWindow.rootViewController = controller
         safeWindow.makeKeyAndVisible()
         
         window = safeWindow

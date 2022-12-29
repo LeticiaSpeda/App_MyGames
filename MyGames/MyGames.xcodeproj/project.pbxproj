@@ -16,6 +16,7 @@
 		E0C55D46295A3BBD009EF445 /* ListGameViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D45295A3BBD009EF445 /* ListGameViewCell.swift */; };
 		E0C55D48295BD574009EF445 /* ListPlatformsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */; };
 		E0C55D4A295BD5BF009EF445 /* ListPlatformsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D49295BD5BF009EF445 /* ListPlatformsViewCell.swift */; };
+		E0C55D4E295CE283009EF445 /* ListTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D4D295CE283009EF445 /* ListTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E0C55D45295A3BBD009EF445 /* ListGameViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListGameViewCell.swift; sourceTree = "<group>"; };
 		E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlatformsTableViewController.swift; sourceTree = "<group>"; };
 		E0C55D49295BD5BF009EF445 /* ListPlatformsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlatformsViewCell.swift; sourceTree = "<group>"; };
+		E0C55D4D295CE283009EF445 /* ListTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			children = (
 				E0C55D42295A3B90009EF445 /* ListGamesTableViewController.swift */,
 				E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */,
+				E0C55D4D295CE283009EF445 /* ListTabViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0C55D4E295CE283009EF445 /* ListTabViewController.swift in Sources */,
 				E0C55D25295A2E69009EF445 /* AppDelegate.swift in Sources */,
 				E0C55D27295A2E69009EF445 /* SceneDelegate.swift in Sources */,
 				E0C55D43295A3B90009EF445 /* ListGamesTableViewController.swift in Sources */,
