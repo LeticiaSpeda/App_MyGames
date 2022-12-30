@@ -13,7 +13,6 @@ final class ListsTabBarController: UITabBarController {
         super.viewDidLoad()
         self.screesTabBar()
         configureStyle()
-
     }
     
     private func screesTabBar() {
@@ -27,7 +26,7 @@ final class ListsTabBarController: UITabBarController {
         listGame.tabBarItem.image = UIImage(named: "game")
         listGame.title = "Jogos"
         listPlatform.tabBarItem.image = UIImage(named: "console")
-        listPlatform.title = "Console"
+        listPlatform.title = "Plataformas"
         
         self.setViewControllers([listGame,listPlatform], animated: true)
     }

@@ -17,6 +17,7 @@
 		E0C55D48295BD574009EF445 /* ListPlatformsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */; };
 		E0C55D4A295BD5BF009EF445 /* ListPlatformsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D49295BD5BF009EF445 /* ListPlatformsViewCell.swift */; };
 		E0C55D4E295CE283009EF445 /* ListTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D4D295CE283009EF445 /* ListTabViewController.swift */; };
+		E0C55D50295D2105009EF445 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D4F295D2105009EF445 /* GameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlatformsTableViewController.swift; sourceTree = "<group>"; };
 		E0C55D49295BD5BF009EF445 /* ListPlatformsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPlatformsViewCell.swift; sourceTree = "<group>"; };
 		E0C55D4D295CE283009EF445 /* ListTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTabViewController.swift; sourceTree = "<group>"; };
+		E0C55D4F295D2105009EF445 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				E0C55D3D295A2EC7009EF445 /* View */,
-				E0C55D44295A3BA2009EF445 /* Cell */,
 				E0C55D3C295A2E9E009EF445 /* Aplication */,
 				E0C55D3B295A2E93009EF445 /* Assets */,
 				E0C55D35295A2E6B009EF445 /* Info.plist */,
@@ -98,6 +99,8 @@
 				E0C55D42295A3B90009EF445 /* ListGamesTableViewController.swift */,
 				E0C55D47295BD574009EF445 /* ListPlatformsTableViewController.swift */,
 				E0C55D4D295CE283009EF445 /* ListTabViewController.swift */,
+				E0C55D4F295D2105009EF445 /* GameViewController.swift */,
+				E0C55D44295A3BA2009EF445 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				E0C55D25295A2E69009EF445 /* AppDelegate.swift in Sources */,
 				E0C55D27295A2E69009EF445 /* SceneDelegate.swift in Sources */,
 				E0C55D43295A3B90009EF445 /* ListGamesTableViewController.swift in Sources */,
+				E0C55D50295D2105009EF445 /* GameViewController.swift in Sources */,
 				E0C55D46295A3BBD009EF445 /* ListGameViewCell.swift in Sources */,
 				E0C55D48295BD574009EF445 /* ListPlatformsTableViewController.swift in Sources */,
 				E0C55D4A295BD5BF009EF445 /* ListPlatformsViewCell.swift in Sources */,

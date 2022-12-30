@@ -44,4 +44,11 @@ final class ListGamesTableViewController: UITableViewController {
         
         return 2
     }
+    override func tableView(
+        _ tableView: UITableView,
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        let controller = GameViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
