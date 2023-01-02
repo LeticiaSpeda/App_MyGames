@@ -15,7 +15,7 @@ final class ListGameViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.spacing = 10
-        stack.enableCode()
+        stack.enableViewCode()
         return stack
     }()
     
@@ -23,7 +23,7 @@ final class ListGameViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 5
-        stack.enableCode()
+        stack.enableViewCode()
         return stack
     }()
     
@@ -31,7 +31,7 @@ final class ListGameViewCell: UITableViewCell {
         let image = UIImage(named: "noCover")
         let imgView = UIImageView(image: image)
         imgView.contentMode = .scaleAspectFit
-        imgView.enableCode()
+        imgView.enableViewCode()
         return imgView
     }()
     
@@ -41,7 +41,7 @@ final class ListGameViewCell: UITableViewCell {
         label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.lineBreakMode = .byWordWrapping
-        label.enableCode()
+        label.enableViewCode()
         return label
     }()
     
@@ -50,7 +50,7 @@ final class ListGameViewCell: UITableViewCell {
         label.text = "Console:"
         label.textColor = .darkGray
         label.font = .systemFont(ofSize: 17, weight: .light)
-        label.enableCode()
+        label.enableViewCode()
         return label
     }()
     
@@ -98,11 +98,5 @@ final class ListGameViewCell: UITableViewCell {
         selectionStyle = .none
         accessoryType = .disclosureIndicator
         backgroundColor = .white
-    }
-}
-
-extension UIView {
-    func enableCode() {
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }

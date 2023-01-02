@@ -13,7 +13,7 @@ final class GameViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.spacing = 5
-        stack.enableCode()
+        stack.enableViewCode()
         return stack
     }()
     
@@ -43,7 +43,7 @@ final class GameViewController: UIViewController {
     private lazy var imageGame: UIImageView = {
         let image = UIImage(named: "noCover")
         let view = UIImageView(image: image)
-        view.enableCode()
+        view.enableViewCode()
         return view
     }()
     
@@ -103,11 +103,5 @@ final class GameViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         navigationItem.rightBarButtonItem = .init(title: "Edit", style: .plain, target: self, action: #selector(detailsItem))
-    }
-}
-
-extension UIView {
-    func enablecode() {
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }

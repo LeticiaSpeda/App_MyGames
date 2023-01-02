@@ -15,7 +15,7 @@ final class ListPlatformsViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "title"
         label.textColor = .black
-        label.enable()
+        label.enableViewCode()
         return label
     }()
     
@@ -50,10 +50,5 @@ final class ListPlatformsViewCell: UITableViewCell {
         selectionStyle = .none
         accessoryType = .disclosureIndicator
         backgroundColor = .white
-    }
-}
-extension UIView {
-    func enable() {
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }
