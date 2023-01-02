@@ -34,7 +34,7 @@ final class GameViewController: UIViewController {
     }()
     private lazy var launchYear: UILabel = {
         let label = UILabel()
-        label.text = "Ano de lançamento"
+        label.text = "Ano de lançamento:"
         label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
@@ -57,6 +57,12 @@ final class GameViewController: UIViewController {
         let navigation = UINavigationController(rootViewController: controller)
         present(navigation, animated: true)
     }
+    
+    @objc func detailsItem() {
+        let controller = NewGameViewController()
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
     private func commonInit(){
         configureHierarchy()
         configureConstrainst()
@@ -71,7 +77,6 @@ final class GameViewController: UIViewController {
         mainVStack.addArrangedSubview(UIView())
         mainVStack.addArrangedSubview(imageGame)
         mainVStack.addArrangedSubview(UIView())
-
     }
     
     private func configureConstrainst(){
@@ -96,6 +101,8 @@ final class GameViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        navigationItem.rightBarButtonItem = .init(title: "Edit", style: .plain, target: self, action: #selector(detailsItem))
     }
 }
 
