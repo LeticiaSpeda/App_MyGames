@@ -33,7 +33,7 @@ final class NewGameViewController: UIViewController {
         tf.textAlignment = .center
         tf.backgroundColor = .white
         tf.layer.borderWidth = 1
-        tf.layer.borderColor = UIColor.gray.cgColor
+        tf.layer.borderColor = UIColor.black.cgColor
         tf.layer.cornerRadius = 4
         tf.enableViewCode()
         return tf
@@ -46,7 +46,7 @@ final class NewGameViewController: UIViewController {
         tf.textAlignment = .center
         tf.backgroundColor = .white
         tf.layer.borderWidth = 1
-        tf.layer.borderColor = UIColor.gray.cgColor
+        tf.layer.borderColor = UIColor.black.cgColor
         tf.layer.cornerRadius = 4
         tf.enableViewCode()
         return tf
@@ -55,7 +55,6 @@ final class NewGameViewController: UIViewController {
     private lazy var dataGame: UILabel = {
         let label = UILabel()
         label.text = "Data de Lançamento"
-        label.textAlignment = .center
         label.textColor = .black
         return label
     }()
@@ -72,7 +71,7 @@ final class NewGameViewController: UIViewController {
     private lazy var cover: UILabel = {
         let label = UILabel()
         label.text = "Capa"
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.textColor = .black
         return label
     }()
@@ -87,8 +86,10 @@ final class NewGameViewController: UIViewController {
     private lazy var addButton: UIButton = {
         let bt = UIButton()
         bt.setTitle("Adicionar", for: .normal)
-        bt.setTitleColor(.systemPink, for: .normal)
-        bt.backgroundColor = .yellow
+        bt.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        bt.setTitleColor(.white, for: .normal)
+        bt.layer.cornerRadius = 8
+        bt.backgroundColor = UIColor(named: "main")
         return bt
     }()
     
@@ -120,7 +121,9 @@ final class NewGameViewController: UIViewController {
             mainVStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
             mainVStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             mainVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            platform.heightAnchor.constraint(equalToConstant: 50)
+            
+            name.heightAnchor.constraint(equalToConstant: 25),
+            platform.heightAnchor.constraint(equalToConstant: 25),
             
         ])
     }
