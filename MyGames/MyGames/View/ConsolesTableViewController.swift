@@ -14,6 +14,10 @@ final class ConsolesTableViewController: UITableViewController {
         configureStyle()
     }
     
+    @objc func addConsole() {
+        
+    }
+    
     private func configureStyle() {
         view.backgroundColor = .white
         navigationItem.title = "Lista de Plataforma"
@@ -26,6 +30,8 @@ final class ConsolesTableViewController: UITableViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addConsole))
     }
     
     override func tableView(_ tableView: UITableView,cellForRowAt indexPath: IndexPath) -> UITableViewCell {

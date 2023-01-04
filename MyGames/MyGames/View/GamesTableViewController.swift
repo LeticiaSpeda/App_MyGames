@@ -18,8 +18,6 @@ final class GamesTableViewController: UITableViewController {
     
     @objc func addItem() {
         let controller = NewGameViewController()
-//        let navigation = UINavigationController(rootViewController: controller)
-//        navigation.modalPresentationStyle = .overFullScreen
         navigationController?.pushViewController(controller, animated: true)
     }
     

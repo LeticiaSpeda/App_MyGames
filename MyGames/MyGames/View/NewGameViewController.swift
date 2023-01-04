@@ -25,7 +25,7 @@ final class NewGameViewController: UIViewController {
         tf.textAlignment = .center
         tf.backgroundColor = .white
         tf.layer.borderWidth = 1
-        tf.layer.borderColor = UIColor.black.cgColor
+        tf.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
         tf.layer.cornerRadius = 4
         tf.enableViewCode()
         return tf
@@ -38,7 +38,7 @@ final class NewGameViewController: UIViewController {
         tf.textAlignment = .center
         tf.backgroundColor = .white
         tf.layer.borderWidth = 1
-        tf.layer.borderColor = UIColor.black.cgColor
+        tf.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
         tf.layer.cornerRadius = 4
         tf.enableViewCode()
         return tf
@@ -70,7 +70,7 @@ final class NewGameViewController: UIViewController {
     
     private lazy var image: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .red
+        view.backgroundColor = .red.withAlphaComponent(0.3)
         view.enableViewCode()
         return view
     }()
@@ -82,12 +82,27 @@ final class NewGameViewController: UIViewController {
         bt.setTitleColor(.white, for: .normal)
         bt.layer.cornerRadius = 8
         bt.backgroundColor = UIColor(named: "main")
+//        bt.addTarget(self, action: #selector(clickImage), for: .touchUpInside)
         return bt
+    }()
+    
+    private lazy var imageButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Toque para adicionar a imagem de capa", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(clickImage), for: .touchUpInside)
+        button.enableViewCode()
+        button.isHidden = true
+        return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
+    }
+    
+    @objc func clickImage() {
+        print("image")
     }
     
     private func commonInit() {
@@ -105,6 +120,7 @@ final class NewGameViewController: UIViewController {
         mainVStack.addArrangedSubview(cover)
         mainVStack.addArrangedSubview(image)
         mainVStack.addArrangedSubview(addButton)
+        image.addSubview(imageButton)
     }
     
     private func configureConstraints() {
@@ -114,8 +130,13 @@ final class NewGameViewController: UIViewController {
             mainVStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             mainVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             
+            imageButton.centerXAnchor.constraint(equalTo: image.centerXAnchor),
+            imageButton.centerYAnchor.constraint(equalTo: image.centerYAnchor),
+            imageButton.heightAnchor.constraint(equalToConstant: 20),
+            
             name.heightAnchor.constraint(equalToConstant: 25),
             platform.heightAnchor.constraint(equalToConstant: 25),
+            
             
         ])
     }
@@ -134,4 +155,3 @@ final class NewGameViewController: UIViewController {
     }
     
 }
-
