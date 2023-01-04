@@ -17,10 +17,10 @@ final class ListsTabBarController: UITabBarController {
     
     private func screesTabBar() {
         let listGame = UINavigationController(
-            rootViewController: ListGamesTableViewController()
+            rootViewController: GamesTableViewController()
         )
         let listPlatform = UINavigationController(
-            rootViewController: ListPlatformsTableViewController()
+            rootViewController: ConsolesTableViewController()
         )
         
         listGame.tabBarItem.image = UIImage(named: "game")

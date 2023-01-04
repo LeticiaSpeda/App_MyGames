@@ -7,13 +7,20 @@
 
 import UIKit
 
-final class ListGamesTableViewController: UITableViewController {
+final class GamesTableViewController: UITableViewController {
     
     
     override func viewDidLoad() {
         tableView.register(ListGameViewCell.self, forCellReuseIdentifier: ListGameViewCell.identifier)
         configureStyle()
         
+    }
+    
+    @objc func addItem() {
+        let controller = NewGameViewController()
+//        let navigation = UINavigationController(rootViewController: controller)
+//        navigation.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     private func configureStyle() {
@@ -28,6 +35,7 @@ final class ListGamesTableViewController: UITableViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addItem))
     }
     
     override func tableView(_ tableView: UITableView,cellForRowAt indexPath: IndexPath) -> UITableViewCell {

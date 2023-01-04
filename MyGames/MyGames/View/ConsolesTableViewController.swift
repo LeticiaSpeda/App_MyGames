@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ListPlatformsTableViewController: UITableViewController {
+final class ConsolesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         tableView.register(ListPlatformsViewCell.self, forCellReuseIdentifier: ListPlatformsViewCell.identifier)

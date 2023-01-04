@@ -17,14 +17,6 @@ final class NewGameViewController: UIViewController {
         return stack
     }()
     
-//    private lazy var mainHStack: UIStackView = {
-//        let stack = UIStackView()
-//        stack.axis = .horizontal
-//        stack.spacing = 18
-//        stack.enableCodeHelper()
-//        return stack
-//    }()
-    
     private lazy var name: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Digite o nome do jogo"

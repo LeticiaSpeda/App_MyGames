@@ -53,7 +53,7 @@ final class GameViewController: UIViewController {
     }
     
     @objc func comeBack(){
-        let controller = ListGamesTableViewController()
+        let controller = GamesTableViewController()
         let navigation = UINavigationController(rootViewController: controller)
         present(navigation, animated: true)
     }
