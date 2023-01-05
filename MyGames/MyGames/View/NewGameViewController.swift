@@ -72,6 +72,7 @@ final class NewGameViewController: UIViewController {
         let view = UIImageView()
         view.backgroundColor = .red.withAlphaComponent(0.3)
         view.enableViewCode()
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -91,8 +92,9 @@ final class NewGameViewController: UIViewController {
         button.setTitle("Toque para adicionar a imagem de capa", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.addTarget(self, action: #selector(clickImage), for: .touchUpInside)
+        button.isUserInteractionEnabled = true
         button.enableViewCode()
-        button.isHidden = true
+//        button.isHidden = true
         return button
     }()
     

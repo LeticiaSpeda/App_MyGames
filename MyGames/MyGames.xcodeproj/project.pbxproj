@@ -20,6 +20,7 @@
 		E0C55D50295D2105009EF445 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D4F295D2105009EF445 /* GameViewController.swift */; };
 		E0C55D522963091A009EF445 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D512963091A009EF445 /* NewGameViewController.swift */; };
 		E0C55D55296321B6009EF445 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C55D54296321B6009EF445 /* UIView+Extensions.swift */; };
+		E0CB1468296622BB00A8FC3E /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0CB1467296622BB00A8FC3E /* Reusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		E0C55D4F295D2105009EF445 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E0C55D512963091A009EF445 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 		E0C55D54296321B6009EF445 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		E0CB1467296622BB00A8FC3E /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,8 +72,9 @@
 		E0C55D23295A2E69009EF445 /* MyGames */ = {
 			isa = PBXGroup;
 			children = (
-				E0C55D53296321AD009EF445 /* Helpers */,
 				E0C55D3D295A2EC7009EF445 /* View */,
+				E0CB1469296622F700A8FC3E /* Commons */,
+				E0C55D53296321AD009EF445 /* Helpers */,
 				E0C55D3C295A2E9E009EF445 /* Aplication */,
 				E0C55D3B295A2E93009EF445 /* Assets */,
 				E0C55D35295A2E6B009EF445 /* Info.plist */,
@@ -126,6 +129,14 @@
 				E0C55D54296321B6009EF445 /* UIView+Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		E0CB1469296622F700A8FC3E /* Commons */ = {
+			isa = PBXGroup;
+			children = (
+				E0CB1467296622BB00A8FC3E /* Reusable.swift */,
+			);
+			path = Commons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0CB1468296622BB00A8FC3E /* Reusable.swift in Sources */,
 				E0C55D4E295CE283009EF445 /* ListTabViewController.swift in Sources */,
 				E0C55D25295A2E69009EF445 /* AppDelegate.swift in Sources */,
 				E0C55D27295A2E69009EF445 /* SceneDelegate.swift in Sources */,

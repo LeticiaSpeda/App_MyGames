@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class ListGameViewCell: UITableViewCell {
-    
-    static let identifier = String(describing: ListGameViewCell.self)
+
+
+final class ListGameViewCell: UITableViewCell, Reusable {
     
     private lazy var mainHStack: UIStackView = {
         let stack = UIStackView()

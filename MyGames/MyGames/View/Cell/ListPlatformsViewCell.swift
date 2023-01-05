@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class ListPlatformsViewCell: UITableViewCell {
-    
-    static let identifier = String(describing: ListPlatformsViewCell.self)
+final class ListPlatformsViewCell: UITableViewCell, Reusable {
     
     private lazy var namee: UILabel = {
         let label = UILabel()
