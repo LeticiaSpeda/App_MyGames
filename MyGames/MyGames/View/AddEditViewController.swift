@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class NewGameViewController: UIViewController {
+final class AddEditViewController: UIViewController {
     
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
@@ -142,6 +142,7 @@ final class NewGameViewController: UIViewController {
             
         ])
     }
+    
     private func configureStyle() {
         view.backgroundColor = .white
         
