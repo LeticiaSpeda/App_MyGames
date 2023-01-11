@@ -9,6 +9,8 @@ import UIKit
 
 final class AddEditViewController: UIViewController {
     
+    var game: Game?
+    
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -70,7 +72,6 @@ final class AddEditViewController: UIViewController {
     
     private lazy var image: UIImageView = {
         let view = UIImageView()
-        view.backgroundColor = .red.withAlphaComponent(0.3)
         view.enableViewCode()
         view.isUserInteractionEnabled = true
         return view
@@ -83,7 +84,7 @@ final class AddEditViewController: UIViewController {
         bt.setTitleColor(.white, for: .normal)
         bt.layer.cornerRadius = 8
         bt.backgroundColor = UIColor(named: "main")
-//        bt.addTarget(self, action: #selector(clickImage), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(addEditGame), for: .touchUpInside)
         return bt
     }()
     
@@ -91,10 +92,12 @@ final class AddEditViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Toque para adicionar a imagem de capa", for: .normal)
         button.setTitleColor(.blue, for: .normal)
-        button.addTarget(self, action: #selector(clickImage), for: .touchUpInside)
+        button.addTarget(
+            self, action: #selector(clickImage),
+            for: .touchUpInside
+        )
         button.isUserInteractionEnabled = true
         button.enableViewCode()
-//        button.isHidden = true
         return button
     }()
     
@@ -105,6 +108,21 @@ final class AddEditViewController: UIViewController {
     
     @objc func clickImage() {
         print("image")
+    }
+    
+    @objc func addEditGame() {
+        if game == nil {
+            game = Game(context: context)
+            game?.title = name.text
+            game?.releadeDate = dataCalendar.date
+            
+            do {
+                try context.save()
+                navigationController?.popViewController(animated: true)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func commonInit() {
@@ -127,19 +145,39 @@ final class AddEditViewController: UIViewController {
     
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            mainVStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainVStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            mainVStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            mainVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            mainVStack.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor,
+                constant: 10
+            ),
+            mainVStack.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: 10
+            ),
+            mainVStack.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -10
+            ),
+            mainVStack.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -10
+            ),
             
-            imageButton.centerXAnchor.constraint(equalTo: image.centerXAnchor),
-            imageButton.centerYAnchor.constraint(equalTo: image.centerYAnchor),
-            imageButton.heightAnchor.constraint(equalToConstant: 20),
+            imageButton.centerXAnchor.constraint(
+                equalTo: image.centerXAnchor
+            ),
+            imageButton.centerYAnchor.constraint(
+                equalTo: image.centerYAnchor
+            ),
+            imageButton.heightAnchor.constraint(
+                equalToConstant: 20
+            ),
             
-            name.heightAnchor.constraint(equalToConstant: 25),
-            platform.heightAnchor.constraint(equalToConstant: 25),
-            
-            
+            name.heightAnchor.constraint(
+                equalToConstant: 25
+            ),
+            platform.heightAnchor.constraint(
+                equalToConstant: 25
+            ),
         ])
     }
     
@@ -156,5 +194,4 @@ final class AddEditViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationItem.title = "Adicionar novo jogo"
     }
-    
 }
