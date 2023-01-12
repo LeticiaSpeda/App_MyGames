@@ -38,9 +38,17 @@ final class ListPlatformsViewCell: UITableViewCell, Reusable {
     
     private func configureConstraints(){
         NSLayoutConstraint.activate([
-            namee.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            namee.leadingAnchor.constraint(equalTo: leadingAnchor),
-            namee.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5)
+            namee.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: 10
+            ),
+            namee.leadingAnchor.constraint(
+                equalTo: leadingAnchor
+            ),
+            namee.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: 5
+            )
         ])
     }
     

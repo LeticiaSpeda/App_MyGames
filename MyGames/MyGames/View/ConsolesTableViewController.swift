@@ -10,7 +10,10 @@ import UIKit
 final class ConsolesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
-        tableView.register(ListPlatformsViewCell.self, forCellReuseIdentifier: ListPlatformsViewCell.identifier)
+        tableView.register(
+            ListPlatformsViewCell.self,
+            forCellReuseIdentifier: ListPlatformsViewCell.identifier
+        )
         configureStyle()
     }
     
@@ -31,12 +34,22 @@ final class ConsolesTableViewController: UITableViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addConsole))
+        navigationItem.rightBarButtonItem = .init(
+            image: UIImage(systemName: "plus"),
+            style: .plain, target: self,
+            action: #selector(addConsole)
+        )
     }
     
-    override func tableView(_ tableView: UITableView,cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ListPlatformsViewCell.identifier, for: indexPath) as? ListPlatformsViewCell {
+        if let cell = tableView.dequeueReusableCell(
+            withIdentifier: ListPlatformsViewCell.identifier,
+            for: indexPath
+        ) as? ListPlatformsViewCell {
             
             return cell
         }
@@ -44,7 +57,10 @@ final class ConsolesTableViewController: UITableViewController {
         return UITableViewCell()
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    override func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int{
         
         return 2
     }

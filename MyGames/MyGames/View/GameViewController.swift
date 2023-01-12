@@ -17,7 +17,7 @@ final class GameViewController: UIViewController {
         return stack
     }()
     
-    private lazy var name: UILabel = {
+    lazy var name: UILabel = {
         let label = UILabel()
         label.text = "Nome do jogo:"
         label.textColor = UIColor(named: "main")
@@ -59,7 +59,7 @@ final class GameViewController: UIViewController {
     }
     
     @objc func detailsItem() {
-        let controller = NewGameViewController()
+        let controller = AddEditViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -81,13 +81,23 @@ final class GameViewController: UIViewController {
     
     private func configureConstrainst(){
         NSLayoutConstraint.activate([
-            mainVStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainVStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            mainVStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            mainVStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            mainVStack.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            mainVStack.leadingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+                constant: 10
+            ),
+            mainVStack.trailingAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+                constant: -10
+            ),
+            mainVStack.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor
+            ),
             
             imageGame.heightAnchor.constraint(equalToConstant: 330),
-                                                      
+            
         ])
     }
     private func configureStyle() {
@@ -102,6 +112,9 @@ final class GameViewController: UIViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        navigationItem.rightBarButtonItem = .init(title: "Edit", style: .plain, target: self, action: #selector(detailsItem))
+        navigationItem.rightBarButtonItem = .init(
+            title: "Edit", style: .plain,
+            target: self, action: #selector(detailsItem)
+        )
     }
 }
