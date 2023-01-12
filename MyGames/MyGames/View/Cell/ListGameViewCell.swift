@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 final class ListGameViewCell: UITableViewCell, Reusable {
     
     private lazy var mainHStack: UIStackView = {
@@ -28,17 +26,16 @@ final class ListGameViewCell: UITableViewCell, Reusable {
     }()
     
     private lazy var imageGame: UIImageView = {
-        let image = UIImage(named: "noCover")
-        let imgView = UIImageView(image: image)
-        imgView.contentMode = .scaleAspectFit
+        let imgView = UIImageView()
+        //        imgView.contentMode = .scaleAspectFit
         imgView.enableViewCode()
         return imgView
     }()
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Nome:"
         label.textColor = .black
+        label.text = "BATATA"
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.lineBreakMode = .byWordWrapping
         label.enableViewCode()
@@ -47,8 +44,7 @@ final class ListGameViewCell: UITableViewCell, Reusable {
     
     private lazy var consoleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Console:"
-        label.textColor = .darkGray
+        label.textColor = .black
         label.font = .systemFont(ofSize: 17, weight: .light)
         label.enableViewCode()
         return label
@@ -61,6 +57,17 @@ final class ListGameViewCell: UITableViewCell, Reusable {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func prepare(with game: Game){
+        nameLabel.text = game.title
+        consoleLabel.text = game.console?.name
+        
+        if let image = game.cover as? UIImage {
+            imageGame.image = image
+        } else {
+            imageGame.image = UIImage(named: "noCover")
+        }
     }
     
     private func commonInit() {
@@ -79,18 +86,32 @@ final class ListGameViewCell: UITableViewCell, Reusable {
         mainHStack.addArrangedSubview(imageGame)
         mainHStack.addArrangedSubview(mainVStack)
         mainHStack.addArrangedSubview(UIView())
-
     }
     
     private func configureConstraints() {
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: 90),
-            mainHStack.topAnchor.constraint(equalTo: topAnchor, constant: 6),
-            mainHStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            mainHStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            mainHStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6),
+            heightAnchor.constraint(
+                equalToConstant: 90
+            ),
+            mainHStack.topAnchor.constraint(
+                equalTo: topAnchor, constant: 6
+            ),
+            mainHStack.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: 10
+            ),
+            mainHStack.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -10
+            ),
+            mainHStack.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: -6
+            ),
             
-            imageGame.widthAnchor.constraint(equalToConstant: 50),
+            imageGame.widthAnchor.constraint(
+                equalToConstant: 50
+            ),
         ])
     }
     
