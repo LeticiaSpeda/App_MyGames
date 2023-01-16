@@ -23,7 +23,7 @@ final class GamesTableViewController: UITableViewController {
             forCellReuseIdentifier: ListGameViewCell.identifier
         )
         configureStyle()
-        label.text = "Você não tem jogos cadastrados"
+        label.text = "Você não tem jogos cadastrados\n clique no + para adicionar um novo jogo"
         label.textColor = .black.withAlphaComponent(0.4)
         label.textAlignment = .center
     }
