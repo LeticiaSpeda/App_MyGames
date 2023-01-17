@@ -23,7 +23,7 @@ final class GamesTableViewController: UITableViewController {
             forCellReuseIdentifier: ListGameViewCell.identifier
         )
         configureStyle()
-        label.text = "Você não tem jogos cadastrados\n clique no + para adicionar um novo jogo"
+        label.text = Constants.GameTableView.mensageTableView.rawValue
         label.textColor = .black.withAlphaComponent(0.4)
         label.textAlignment = .center
     }
@@ -41,7 +41,7 @@ final class GamesTableViewController: UITableViewController {
     
     private func loadGames() {
         let festRequest: NSFetchRequest<Game> = Game.fetchRequest()
-        let sortDescritor = NSSortDescriptor(key: "title", ascending: true)
+        let sortDescritor = NSSortDescriptor(key: Constants.GameTableView.key.rawValue, ascending: true)
         festRequest.sortDescriptors = [sortDescritor]
         
         fetchedResultController = NSFetchedResultsController(
@@ -59,10 +59,10 @@ final class GamesTableViewController: UITableViewController {
     
     func configureStyle() {
         view.backgroundColor = .white
-        navigationItem.title = "Lista de Jogos"
+        navigationItem.title = Constants.GameTableView.title.rawValue
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "main")
+        appearance.backgroundColor = UIColor(named: Constants.color.game.rawValue)
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue
@@ -70,7 +70,7 @@ final class GamesTableViewController: UITableViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationItem.rightBarButtonItem = .init(
-            image: UIImage(systemName: "plus"),
+            image: UIImage(systemName: Constants.GameTableView.image.rawValue),
             style: .plain,
             target: self, action: #selector(addItem)
         )

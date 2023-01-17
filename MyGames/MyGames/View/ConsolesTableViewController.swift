@@ -38,10 +38,10 @@ final class ConsolesTableViewController: UITableViewController {
     
     private func configureStyle() {
         view.backgroundColor = .white
-        navigationItem.title = "Lista de Plataforma"
+        navigationItem.title = Constants.ConsoleTableView.title.rawValue
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "second")
+        appearance.backgroundColor = UIColor(named: Constants.color.platform.rawValue)
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue
@@ -50,28 +50,28 @@ final class ConsolesTableViewController: UITableViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         navigationItem.rightBarButtonItem = .init(
-            image: UIImage(systemName: "plus"),
+            image: UIImage(systemName: Constants.ConsoleTableView.image.rawValue),
             style: .plain, target: self,
             action: #selector(addConsole)
         )
     }
     
     private func showAlert(with console: Console?) {
-        let tittle = console == nil ? "Adicionar" : "Editar"
+        let title = console == nil ? Constants.ConsoleTableView.addAlert.rawValue : Constants.ConsoleTableView.eddAlert.rawValue
         let alert = UIAlertController(
-            title: tittle + " plataforma ",
+            title: title + Constants.ConsoleTableView.platforms.rawValue,
             message: nil,
             preferredStyle: .alert
         )
         alert.addTextField { (textField) in
-            textField.placeholder = "Nome da plataforma"
+            textField.placeholder = Constants.ConsoleTableView.name.rawValue
             if let name = console?.name {
                 textField.text = name
             }
         }
         
         alert.addAction(
-            UIAlertAction(title: tittle, style: .default, handler: { (action) in
+            UIAlertAction(title: title, style: .default, handler: { (action) in
                 let console = console ?? Console(context: self.context)
                 console.name = alert.textFields?.first?.text
                 do {
@@ -83,8 +83,8 @@ final class ConsolesTableViewController: UITableViewController {
                 }
             }))
         
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
-        alert.view.tintColor = UIColor(named: "second")
+        alert.addAction(UIAlertAction(title: Constants.ConsoleTableView.cancelPlatforms.rawValue, style: .cancel))
+        alert.view.tintColor = UIColor(named: Constants.color.platform.rawValue)
         present(alert, animated: true)
     }
     
