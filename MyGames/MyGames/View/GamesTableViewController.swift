@@ -28,6 +28,12 @@ final class GamesTableViewController: UITableViewController {
         label.textAlignment = .center
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadGames()
+        tableView.reloadData()
+    }
+    
     @objc func addItem() {
         let controller = AddEditViewController()
         navigationController?.pushViewController(controller, animated: true)
@@ -101,11 +107,6 @@ final class GamesTableViewController: UITableViewController {
     ) {
         let controller = GameViewController()
         navigationController?.pushViewController(controller, animated: true)
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadGames()
-        tableView.reloadData()
     }
 }
 
