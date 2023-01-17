@@ -9,14 +9,6 @@ import UIKit
 
 final class ListPlatformsViewCell: UITableViewCell, Reusable {
     
-    private lazy var namee: UILabel = {
-        let label = UILabel()
-        label.text = "title"
-        label.textColor = .black
-        label.enableViewCode()
-        return label
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -33,22 +25,11 @@ final class ListPlatformsViewCell: UITableViewCell, Reusable {
     }
     
     private func configureHierarchy() {
-        addSubview(namee)
+        
     }
     
     private func configureConstraints(){
         NSLayoutConstraint.activate([
-            namee.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: 10
-            ),
-            namee.leadingAnchor.constraint(
-                equalTo: leadingAnchor
-            ),
-            namee.bottomAnchor.constraint(
-                equalTo: bottomAnchor,
-                constant: 5
-            )
         ])
     }
     
