@@ -9,7 +9,10 @@ import UIKit
 
 final class ConsolesTableViewController: UITableViewController {
     
+    var consolesManager = ConsolesManager.shared
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.register(
             ListPlatformsViewCell.self,
             forCellReuseIdentifier: ListPlatformsViewCell.identifier
@@ -17,8 +20,20 @@ final class ConsolesTableViewController: UITableViewController {
         configureStyle()
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadConsoles()
+        tableView.reloadData()
+
+    }
+
     @objc func addConsole() {
-        
+        showAlert(with: nil)
+    }
+    
+    private func loadConsoles() {
+        consolesManager.loadConsoler(with: context)
     }
     
     private func configureStyle() {
@@ -41,6 +56,38 @@ final class ConsolesTableViewController: UITableViewController {
         )
     }
     
+    private func showAlert(with console: Console?) {
+        let tittle = console == nil ? "Adicionar" : "Editar"
+        let alert = UIAlertController(
+            title: tittle + " plataforma ",
+            message: nil,
+            preferredStyle: .alert
+        )
+        alert.addTextField { (textField) in
+            textField.placeholder = "Nome da plataforma"
+            if let name = console?.name {
+                textField.text = name
+            }
+        }
+        
+        alert.addAction(
+            UIAlertAction(title: tittle, style: .default, handler: { (action) in
+                let console = console ?? Console(context: self.context)
+                console.name = alert.textFields?.first?.text
+                do {
+                    try self.context.save()
+                    self.loadConsoles()
+                    self.tableView.reloadData()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }))
+        
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        alert.view.tintColor = UIColor(named: "second")
+        present(alert, animated: true)
+    }
+    
     override func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
@@ -51,6 +98,8 @@ final class ConsolesTableViewController: UITableViewController {
             for: indexPath
         ) as? ListPlatformsViewCell {
             
+            let console = consolesManager.consoles[indexPath.row]
+            cell.textLabel?.text = console.name
             return cell
         }
         
@@ -62,6 +111,6 @@ final class ConsolesTableViewController: UITableViewController {
         numberOfRowsInSection section: Int
     ) -> Int{
         
-        return 2
+        return consolesManager.consoles.count
     }
 }
