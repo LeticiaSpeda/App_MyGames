@@ -10,6 +10,7 @@ import UIKit
 final class AddEditViewController: UIViewController {
     
     var game: Game?
+    var consolesManager = ConsolesManager.shared
     
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
@@ -42,6 +43,7 @@ final class AddEditViewController: UIViewController {
         tf.layer.borderWidth = 1
         tf.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
         tf.layer.cornerRadius = 4
+        tf.inputView = pickerView 
         tf.enableViewCode()
         return tf
     }()
@@ -60,6 +62,13 @@ final class AddEditViewController: UIViewController {
         calendar.contentHorizontalAlignment = .center
         calendar.enableViewCode()
         return calendar
+    }()
+    
+    private lazy var pickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        return picker
     }()
     
     private lazy var cover: UILabel = {
@@ -104,6 +113,11 @@ final class AddEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        consolesManager.loadConsoler(with: context )
     }
     
     @objc func clickImage() {
@@ -193,5 +207,20 @@ final class AddEditViewController: UIViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationItem.title = Constants.AddEditController.title.rawValue
+    }
+}
+
+extension AddEditViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+         return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return consolesManager.consoles.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let console = consolesManager.consoles[row]
+        return console.name
     }
 }
