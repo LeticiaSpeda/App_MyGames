@@ -20,7 +20,7 @@ final class AddEditViewController: UIViewController {
         return stack
     }()
     
-    private lazy var name: UITextField = {
+    private lazy var nameGameLabel: UITextField = {
         let tf = UITextField()
         tf.placeholder = Constants.AddEditController.title.rawValue
         tf.textAlignment = .center
@@ -34,7 +34,7 @@ final class AddEditViewController: UIViewController {
         return tf
     }()
     
-    private lazy var platform: UITextField = {
+    private lazy var platformTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = Constants.app.platform.rawValue
         tf.textColor = .black
@@ -43,12 +43,19 @@ final class AddEditViewController: UIViewController {
         tf.layer.borderWidth = 1
         tf.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
         tf.layer.cornerRadius = 4
-        tf.inputView = pickerView 
+        tf.inputView = pickerView
         tf.enableViewCode()
         return tf
     }()
     
-    private lazy var dataGame: UILabel = {
+    private lazy var pickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        return picker
+    }()
+    
+    private lazy var dataYearLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.AddEditController.date.rawValue
         label.textColor = .black
@@ -64,14 +71,7 @@ final class AddEditViewController: UIViewController {
         return calendar
     }()
     
-    private lazy var pickerView: UIPickerView = {
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        return picker
-    }()
-    
-    private lazy var cover: UILabel = {
+    private lazy var coverLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.AddEditController.cover.rawValue
         label.textAlignment = .left
@@ -127,7 +127,7 @@ final class AddEditViewController: UIViewController {
     @objc func addEditGame() {
         if game == nil {
             game = Game(context: context)
-            game?.title = name.text
+            game?.title = nameGameLabel.text
             game?.releadeDate = dataCalendar.date
             
             do {
@@ -147,11 +147,11 @@ final class AddEditViewController: UIViewController {
     
     private func configureHierarchy() {
         view.addSubview(mainVStack)
-        mainVStack.addArrangedSubview(name)
-        mainVStack.addArrangedSubview(platform)
-        mainVStack.addArrangedSubview(dataGame)
+        mainVStack.addArrangedSubview(nameGameLabel)
+        mainVStack.addArrangedSubview(platformTextField)
+        mainVStack.addArrangedSubview(dataYearLabel)
         mainVStack.addArrangedSubview(dataCalendar)
-        mainVStack.addArrangedSubview(cover)
+        mainVStack.addArrangedSubview(coverLabel)
         mainVStack.addArrangedSubview(image)
         mainVStack.addArrangedSubview(addButton)
         image.addSubview(imageButton)
@@ -186,10 +186,10 @@ final class AddEditViewController: UIViewController {
                 equalToConstant: 20
             ),
             
-            name.heightAnchor.constraint(
+            nameGameLabel.heightAnchor.constraint(
                 equalToConstant: 25
             ),
-            platform.heightAnchor.constraint(
+            platformTextField.heightAnchor.constraint(
                 equalToConstant: 25
             ),
         ])
@@ -207,20 +207,5 @@ final class AddEditViewController: UIViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationItem.title = Constants.AddEditController.title.rawValue
-    }
-}
-
-extension AddEditViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-         return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return consolesManager.consoles.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let console = consolesManager.consoles[row]
-        return console.name
     }
 }
