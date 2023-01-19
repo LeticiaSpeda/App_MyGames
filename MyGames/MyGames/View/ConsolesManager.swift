@@ -13,11 +13,14 @@ final class ConsolesManager {
     
     func loadConsoler(with context: NSManagedObjectContext) {
         let festRequest: NSFetchRequest<Console> = Console.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: Constants.ConsoleManager.key.rawValue, ascending: true)
+        let sortDescriptor = NSSortDescriptor(
+            key: Constants.ConsoleManager.key.rawValue,
+            ascending: true
+        )
         festRequest.sortDescriptors = [sortDescriptor]
         
         do {
-          consoles = try context.fetch(festRequest)
+            consoles = try context.fetch(festRequest)
         } catch {
             print(error.localizedDescription)
         }
@@ -33,7 +36,4 @@ final class ConsolesManager {
         }
     }
     
-    private init() {
-        
-    }
 }

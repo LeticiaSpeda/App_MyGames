@@ -12,11 +12,18 @@ extension AddEditViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return 1
     }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        numberOfRowsInComponent component: Int
+    ) -> Int {
         return consolesManager.consoles.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(
+        _ pickerView: UIPickerView,
+        titleForRow row: Int,
+        forComponent component: Int
+    ) -> String? {
         let console = consolesManager.consoles[row]
         return console.name
     }
@@ -28,6 +35,5 @@ extension AddEditViewController: UIImagePickerControllerDelegate, UINavigationCo
         coverImage.image = image
         imageButton.setTitle(nil, for: .normal)
         dismiss(animated: true)
-    }
-    
+    }   
 }
