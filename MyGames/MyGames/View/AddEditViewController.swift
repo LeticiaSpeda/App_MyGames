@@ -44,6 +44,7 @@ final class AddEditViewController: UIViewController {
         tf.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
         tf.layer.cornerRadius = 4
         tf.inputView = pickerView
+        tf.inputAccessoryView = toolbar
         tf.enableViewCode()
         return tf
     }()
@@ -52,6 +53,7 @@ final class AddEditViewController: UIViewController {
         let picker = UIPickerView()
         picker.delegate = self
         picker.dataSource = self
+        picker.backgroundColor = .black.withAlphaComponent(0.3 )
         return picker
     }()
     
@@ -110,6 +112,23 @@ final class AddEditViewController: UIViewController {
         return button
     }()
     
+    private lazy var toolbar: UIToolbar = {
+        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+        bar.tintColor = UIColor(named: Constants.color.game.rawValue)
+        bar.items = [cancelButton, doneButton]
+        return bar
+    }()
+    
+    private lazy var cancelButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+        return button
+    }()
+    
+    private lazy var doneButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        return button
+    }()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
@@ -119,6 +138,7 @@ final class AddEditViewController: UIViewController {
         super.viewWillAppear(animated)
         consolesManager.loadConsoler(with: context )
     }
+                                     
     
     @objc func clickImage() {
         
@@ -137,6 +157,15 @@ final class AddEditViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    @objc func handleCancel() {
+        platformTextField.resignFirstResponder()
+    }
+    
+    @objc func handleDone() {
+        platformTextField.text = consolesManager.consoles[pickerView.selectedRow(inComponent: 0)].name
+        handleCancel()
     }
     
     private func commonInit() {
