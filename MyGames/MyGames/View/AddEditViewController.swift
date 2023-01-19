@@ -115,7 +115,7 @@ final class AddEditViewController: UIViewController {
     private lazy var toolbar: UIToolbar = {
         let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
         bar.tintColor = UIColor(named: Constants.color.game.rawValue)
-        bar.items = [cancelButton, doneButton]
+        bar.items = [cancelButton,flexibleSpaceButton,doneButton]
         return bar
     }()
     
@@ -126,6 +126,11 @@ final class AddEditViewController: UIViewController {
     
     private lazy var doneButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        return button
+    }()
+    
+    private lazy var flexibleSpaceButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         return button
     }()
         
