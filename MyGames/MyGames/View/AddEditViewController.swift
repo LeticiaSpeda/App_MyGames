@@ -73,7 +73,7 @@ final class AddEditViewController: UIViewController {
         return calendar
     }()
     
-    private lazy var coverLabel: UILabel = {
+    private(set) lazy var coverLabel: UILabel = {
         let label = UILabel()
         label.text = Constants.AddEditController.cover.rawValue
         label.textAlignment = .left
@@ -81,7 +81,7 @@ final class AddEditViewController: UIViewController {
         return label
     }()
     
-    private lazy var image: UIImageView = {
+    private(set) lazy var coverImage: UIImageView = {
         let view = UIImageView()
         view.enableViewCode()
         view.isUserInteractionEnabled = true
@@ -99,7 +99,7 @@ final class AddEditViewController: UIViewController {
         return bt
     }()
     
-    private lazy var imageButton: UIButton = {
+    private(set) lazy var imageButton: UIButton = {
         let button = UIButton()
         button.setTitle(Constants.AddEditController.image.rawValue, for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -146,14 +146,41 @@ final class AddEditViewController: UIViewController {
                                      
     
     @objc func clickImage() {
+        let alert = UIAlertController(title: "Selecionar poster", message: "De onde você quer escolhero poster?", preferredStyle: .actionSheet)
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Câmera", style: .default) { (action: UIAlertAction) in
+                self.selectPicture(sourceType: .camera)
+            }
+            alert.addAction(cameraAction)
+        }
+        let libraryAction = UIAlertAction(title: "Biblioteca de fotos", style: .default) { (action: UIAlertAction) in
+            self.selectPicture(sourceType: .photoLibrary)
+        }
         
+        alert.addAction(libraryAction)
+        
+        let photoAction = UIAlertAction(title: "Álbum de fotos", style: .default) { (action: UIAlertAction) in
+            self.selectPicture(sourceType: .savedPhotosAlbum)
+        }
+        
+        alert.addAction(photoAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .default)
+        alert.addAction(cancelAction)
+        present(alert, animated: true)
     }
+    
     
     @objc func addEditGame() {
         if game == nil {
             game = Game(context: context)
             game?.title = nameGameLabel.text
             game?.releadeDate = dataCalendar.date
+            game?.cover = coverImage.image
+            if !platformTextField.text!.isEmpty {
+                let console = consolesManager.consoles[pickerView.selectedRow(inComponent: 0)]
+                game?.console = console
+            }
             
             do {
                 try context.save()
@@ -173,6 +200,14 @@ final class AddEditViewController: UIViewController {
         handleCancel()
     }
     
+    private func selectPicture(sourceType: UIImagePickerController.SourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        imagePicker.navigationBar.tintColor = UIColor(named: Constants.color.game.rawValue)
+        present(imagePicker, animated: true)
+    }
+    
     private func commonInit() {
         configureHierarchy()
         configureConstraints()
@@ -186,9 +221,9 @@ final class AddEditViewController: UIViewController {
         mainVStack.addArrangedSubview(dataYearLabel)
         mainVStack.addArrangedSubview(dataCalendar)
         mainVStack.addArrangedSubview(coverLabel)
-        mainVStack.addArrangedSubview(image)
+        mainVStack.addArrangedSubview(coverImage)
         mainVStack.addArrangedSubview(addButton)
-        image.addSubview(imageButton)
+        coverImage.addSubview(imageButton)
     }
     
     private func configureConstraints() {
@@ -211,10 +246,10 @@ final class AddEditViewController: UIViewController {
             ),
             
             imageButton.centerXAnchor.constraint(
-                equalTo: image.centerXAnchor
+                equalTo: coverImage.centerXAnchor
             ),
             imageButton.centerYAnchor.constraint(
-                equalTo: image.centerYAnchor
+                equalTo: coverImage.centerYAnchor
             ),
             imageButton.heightAnchor.constraint(
                 equalToConstant: 20
