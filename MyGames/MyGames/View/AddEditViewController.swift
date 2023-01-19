@@ -101,7 +101,10 @@ final class AddEditViewController: UIViewController {
     
     private(set) lazy var imageButton: UIButton = {
         let button = UIButton()
-        button.setTitle(Constants.AddEditController.image.rawValue, for: .normal)
+        button.setTitle(
+            Constants.AddEditController.image.rawValue,
+            for: .normal
+        )
         button.setTitleColor(.blue, for: .normal)
         button.addTarget(
             self, action: #selector(clickImage),
@@ -113,27 +116,45 @@ final class AddEditViewController: UIViewController {
     }()
     
     private lazy var toolbar: UIToolbar = {
-        let bar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+        let bar = UIToolbar(
+            frame: CGRect(
+                x: 0, y: 0,
+                width: view.frame.width,
+                height: 44
+            )
+        )
         bar.tintColor = UIColor(named: Constants.color.game.rawValue)
         bar.items = [cancelButton,flexibleSpaceButton,doneButton]
         return bar
     }()
     
     private lazy var cancelButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(handleCancel)
+        )
         return button
     }()
     
     private lazy var doneButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .done,
+            target: self,
+            action: #selector(handleDone)
+        )
         return button
     }()
     
     private lazy var flexibleSpaceButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let button = UIBarButtonItem(
+            barButtonSystemItem: .flexibleSpace,
+            target: nil,
+            action: nil
+        )
         return button
     }()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
@@ -143,29 +164,44 @@ final class AddEditViewController: UIViewController {
         super.viewWillAppear(animated)
         consolesManager.loadConsoler(with: context )
     }
-                                     
     
     @objc func clickImage() {
-        let alert = UIAlertController(title: "Selecionar poster", message: "De onde você quer escolhero poster?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(
+            title: Constants.AddEditController.titleAlert.rawValue ,
+            message: Constants.AddEditController.messageAlert.rawValue,
+            preferredStyle: .actionSheet
+        )
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let cameraAction = UIAlertAction(title: "Câmera", style: .default) { (action: UIAlertAction) in
+            let cameraAction = UIAlertAction(
+                title: Constants.AddEditController.optionCamera.rawValue,
+                style: .default
+            ) { (action: UIAlertAction) in
                 self.selectPicture(sourceType: .camera)
             }
             alert.addAction(cameraAction)
         }
-        let libraryAction = UIAlertAction(title: "Biblioteca de fotos", style: .default) { (action: UIAlertAction) in
+        let libraryAction = UIAlertAction(
+            title: Constants.AddEditController.optionLibrary.rawValue,
+            style: .default
+        ) { (action: UIAlertAction) in
             self.selectPicture(sourceType: .photoLibrary)
         }
         
         alert.addAction(libraryAction)
         
-        let photoAction = UIAlertAction(title: "Álbum de fotos", style: .default) { (action: UIAlertAction) in
+        let photoAction = UIAlertAction(
+            title: Constants.AddEditController.optionPhoto.rawValue,
+            style: .default
+        ) { (action: UIAlertAction) in
             self.selectPicture(sourceType: .savedPhotosAlbum)
         }
         
         alert.addAction(photoAction)
         
-        let cancelAction = UIAlertAction(title: "Cancelar", style: .default)
+        let cancelAction = UIAlertAction(
+            title: Constants.AddEditController.optionCancel.rawValue ,
+            style: .default
+        )
         alert.addAction(cancelAction)
         present(alert, animated: true)
     }
@@ -178,7 +214,9 @@ final class AddEditViewController: UIViewController {
             game?.releadeDate = dataCalendar.date
             game?.cover = coverImage.image
             if !platformTextField.text!.isEmpty {
-                let console = consolesManager.consoles[pickerView.selectedRow(inComponent: 0)]
+                let console = consolesManager.consoles[
+                    pickerView.selectedRow(inComponent: 0)
+                ]
                 game?.console = console
             }
             
@@ -196,7 +234,9 @@ final class AddEditViewController: UIViewController {
     }
     
     @objc func handleDone() {
-        platformTextField.text = consolesManager.consoles[pickerView.selectedRow(inComponent: 0)].name
+        platformTextField.text = consolesManager.consoles[
+            pickerView.selectedRow(inComponent: 0)
+        ].name
         handleCancel()
     }
     
@@ -204,7 +244,9 @@ final class AddEditViewController: UIViewController {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = sourceType
         imagePicker.delegate = self
-        imagePicker.navigationBar.tintColor = UIColor(named: Constants.color.game.rawValue)
+        imagePicker.navigationBar.tintColor = UIColor(
+            named: Constants.color.game.rawValue
+        )
         present(imagePicker, animated: true)
     }
     
@@ -268,7 +310,9 @@ final class AddEditViewController: UIViewController {
         view.backgroundColor = .white
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: Constants.color.game.rawValue)
+        appearance.backgroundColor = UIColor(
+            named: Constants.color.game.rawValue
+        )
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = false
         
