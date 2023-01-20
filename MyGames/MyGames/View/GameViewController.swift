@@ -19,29 +19,29 @@ final class GameViewController: UIViewController {
     
     lazy var name: UILabel = {
         let label = UILabel()
-        label.text = "Nome do jogo:"
-        label.textColor = UIColor(named: "main")
+        label.text = Constants.GameController.title.rawValue
+        label.textColor = UIColor(named: Constants.color.game.rawValue)
         label.font = .systemFont(ofSize: 22, weight: .semibold)
         return label
     }()
     
     private lazy var namePlatform: UILabel = {
         let label = UILabel()
-        label.text = "Plataforma:"
+        label.text = Constants.GameController.nameplatform.rawValue
         label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()
     private lazy var launchYear: UILabel = {
         let label = UILabel()
-        label.text = "Ano de lançamento:"
+        label.text = Constants.GameController.year.rawValue
         label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()
     
     private lazy var imageGame: UIImageView = {
-        let image = UIImage(named: "noCover")
+        let image = UIImage(named: Constants.image.noCover.rawValue)
         let view = UIImageView(image: image)
         view.enableViewCode()
         return view
@@ -113,7 +113,7 @@ final class GameViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         navigationItem.rightBarButtonItem = .init(
-            title: "Edit", style: .plain,
+            title: Constants.GameController.button.rawValue, style: .plain,
             target: self, action: #selector(detailsItem)
         )
     }

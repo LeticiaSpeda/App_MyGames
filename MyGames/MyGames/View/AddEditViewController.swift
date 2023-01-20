@@ -21,7 +21,7 @@ final class AddEditViewController: UIViewController {
     
     private lazy var name: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Digite o nome do jogo"
+        tf.placeholder = Constants.AddEditController.title.rawValue
         tf.textAlignment = .center
         tf.textColor = .black
         tf.textAlignment = .center
@@ -35,7 +35,7 @@ final class AddEditViewController: UIViewController {
     
     private lazy var platform: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Plataforma"
+        tf.placeholder = Constants.app.platform.rawValue
         tf.textColor = .black
         tf.textAlignment = .center
         tf.backgroundColor = .white
@@ -48,7 +48,7 @@ final class AddEditViewController: UIViewController {
     
     private lazy var dataGame: UILabel = {
         let label = UILabel()
-        label.text = "Data de Lançamento"
+        label.text = Constants.AddEditController.date.rawValue
         label.textColor = .black
         return label
     }()
@@ -64,7 +64,7 @@ final class AddEditViewController: UIViewController {
     
     private lazy var cover: UILabel = {
         let label = UILabel()
-        label.text = "Capa"
+        label.text = Constants.AddEditController.cover.rawValue
         label.textAlignment = .left
         label.textColor = .black
         return label
@@ -79,18 +79,18 @@ final class AddEditViewController: UIViewController {
     
     private lazy var addButton: UIButton = {
         let bt = UIButton()
-        bt.setTitle("Adicionar", for: .normal)
+        bt.setTitle(Constants.AddEditController.button.rawValue, for: .normal)
         bt.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         bt.setTitleColor(.white, for: .normal)
         bt.layer.cornerRadius = 8
-        bt.backgroundColor = UIColor(named: "main")
+        bt.backgroundColor = UIColor(named: Constants.color.game.rawValue)
         bt.addTarget(self, action: #selector(addEditGame), for: .touchUpInside)
         return bt
     }()
     
     private lazy var imageButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Toque para adicionar a imagem de capa", for: .normal)
+        button.setTitle(Constants.AddEditController.image.rawValue, for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.addTarget(
             self, action: #selector(clickImage),
@@ -107,7 +107,7 @@ final class AddEditViewController: UIViewController {
     }
     
     @objc func clickImage() {
-        print("image")
+        
     }
     
     @objc func addEditGame() {
@@ -185,13 +185,13 @@ final class AddEditViewController: UIViewController {
         view.backgroundColor = .white
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "main")
+        appearance.backgroundColor = UIColor(named: Constants.color.game.rawValue)
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = false
         
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationItem.title = "Adicionar novo jogo"
+        navigationItem.title = Constants.AddEditController.title.rawValue
     }
 }
