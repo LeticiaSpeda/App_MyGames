@@ -12,6 +12,7 @@ final class GamesTableViewController: UITableViewController {
     
     var fetchedResultController: NSFetchedResultsController<Game>?
     var label = UILabel()
+
     
     var localGames: [Game] {
         fetchedResultController?.fetchedObjects ?? []
@@ -111,6 +112,10 @@ final class GamesTableViewController: UITableViewController {
         didSelectRowAt indexPath: IndexPath
     ) {
         let controller = GameViewController()
+    
+        if let games = fetchedResultController?.fetchedObjects {
+            controller.game = games[tableView.indexPathForSelectedRow!.row]
+        }
         navigationController?.pushViewController(controller, animated: true)
     }
 }
