@@ -9,6 +9,8 @@ import UIKit
 
 final class GameViewController: UIViewController {
     
+    var game: Game?
+    
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -19,7 +21,7 @@ final class GameViewController: UIViewController {
     
     lazy var name: UILabel = {
         let label = UILabel()
-        label.text = Constants.GameController.title.rawValue
+        label.text = game?.title
         label.textColor = UIColor(named: Constants.color.game.rawValue)
         label.font = .systemFont(ofSize: 22, weight: .semibold)
         return label
@@ -27,14 +29,13 @@ final class GameViewController: UIViewController {
     
     private lazy var namePlatform: UILabel = {
         let label = UILabel()
-        label.text = Constants.GameController.nameplatform.rawValue
+        label.text = game?.console?.name
         label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
     }()
     private lazy var launchYear: UILabel = {
         let label = UILabel()
-        label.text = Constants.GameController.year.rawValue
         label.textColor = .black
         label.font = .systemFont(ofSize: 16, weight: .regular)
         return label
@@ -43,6 +44,8 @@ final class GameViewController: UIViewController {
     private lazy var imageGame: UIImageView = {
         let image = UIImage(named: Constants.image.noCover.rawValue)
         let view = UIImageView(image: image)
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
         view.enableViewCode()
         return view
     }()
@@ -50,6 +53,22 @@ final class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let releadeDate = game?.releadeDate {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.locale = Locale(identifier: "pt-BR")
+            launchYear.text = "Lançamento: " + formatter.string(from: releadeDate)
+        }
+        
+        if let image = game?.cover as? UIImage {
+            imageGame.image = image
+        } else {
+            imageGame.image = UIImage(named: Constants.image.noCoverFull.rawValue)
+        }
     }
     
     @objc func comeBack(){
@@ -74,9 +93,11 @@ final class GameViewController: UIViewController {
         mainVStack.addArrangedSubview(name)
         mainVStack.addArrangedSubview(namePlatform)
         mainVStack.addArrangedSubview(launchYear)
-        mainVStack.addArrangedSubview(UIView())
         mainVStack.addArrangedSubview(imageGame)
-        mainVStack.addArrangedSubview(UIView())
+        
+        [name, namePlatform,launchYear].forEach{
+            $0.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        }
     }
     
     private func configureConstrainst(){
@@ -95,9 +116,6 @@ final class GameViewController: UIViewController {
             mainVStack.bottomAnchor.constraint(
                 equalTo: view.safeAreaLayoutGuide.bottomAnchor
             ),
-            
-            imageGame.heightAnchor.constraint(equalToConstant: 330),
-            
         ])
     }
     private func configureStyle() {
