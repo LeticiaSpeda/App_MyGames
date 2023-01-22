@@ -79,6 +79,7 @@ final class GameViewController: UIViewController {
     
     @objc func detailsItem() {
         let controller = AddEditViewController()
+        controller.game = game
         navigationController?.pushViewController(controller, animated: true)
     }
     
