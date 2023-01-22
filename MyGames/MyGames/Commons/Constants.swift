@@ -57,6 +57,8 @@ enum Constants {
         case optionLibrary = "Biblioteca de fotos"
         case optionPhoto = "Álbum de fotos"
         case optionCancel = "Cancelar"
+        case edd = "Editar"
+        case change = "Alterar"
     }
     
     enum color: String {
