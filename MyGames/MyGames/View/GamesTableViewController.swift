@@ -12,7 +12,7 @@ final class GamesTableViewController: UITableViewController {
     
     var fetchedResultController: NSFetchedResultsController<Game>?
     var label = UILabel()
-
+    
     
     var localGames: [Game] {
         fetchedResultController?.fetchedObjects ?? []
@@ -112,11 +112,20 @@ final class GamesTableViewController: UITableViewController {
         didSelectRowAt indexPath: IndexPath
     ) {
         let controller = GameViewController()
-    
+        
         if let games = fetchedResultController?.fetchedObjects {
             controller.game = games[tableView.indexPathForSelectedRow!.row]
         }
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let game = fetchedResultController?.fetchedObjects?[indexPath.row] else { return }
+            context.delete(game) //Deletando do banco de dados
+            loadGames() //Atualizando a controller que olha o banco de dados
+            tableView.reloadData() //Atualiando a lista que olha a controller
+        }
     }
 }
 
@@ -130,6 +139,9 @@ extension GamesTableViewController: NSFetchedResultsControllerDelegate {
             
             switch type {
             case .delete:
+                if let indexPath = indexPath {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
                 break
             default:
                 tableView.reloadData()
