@@ -26,7 +26,7 @@ final class ConsolesManager {
         }
     }
     
-    private func deleteConsole(index: Int, context: NSManagedObjectContext) {
+     func deleteConsole(index: Int, context: NSManagedObjectContext) {
         let console = consoles[index]
         context.delete(console)
         do {
