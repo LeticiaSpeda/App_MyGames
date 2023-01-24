@@ -9,7 +9,12 @@ import UIKit
 
 final class GameViewController: UIViewController {
     
-    var game: Game?
+    var game: Game? {
+        didSet {
+            name.text = game?.title
+            namePlatform.text = game?.console?.name
+        }
+    }
     
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
@@ -69,6 +74,7 @@ final class GameViewController: UIViewController {
         } else {
             imageGame.image = UIImage(named: Constants.image.noCoverFull.rawValue)
         }
+        
     }
     
     @objc func comeBack(){
@@ -79,6 +85,9 @@ final class GameViewController: UIViewController {
     
     @objc func detailsItem() {
         let controller = AddEditViewController()
+        controller.onEdit = { [weak self] game in
+            self?.game = game
+        }
         controller.game = game
         navigationController?.pushViewController(controller, animated: true)
     }
