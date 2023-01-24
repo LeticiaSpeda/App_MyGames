@@ -18,16 +18,17 @@ final class GamesTableViewController: UITableViewController {
         fetchedResultController?.fetchedObjects ?? []
     }
     
+    //MARK: Component
     private lazy var searchController: UISearchController = {
         let search = UISearchController()
         search.searchResultsUpdater = self
-//        search.dimsBackgroundDuringPresentation = false
         search.searchBar.tintColor = .white
         search.searchBar.barTintColor = .white
         search.searchBar.delegate = self
         return search
     }()
     
+    //MARK: LifeCycle
     override func viewDidLoad() {
         tableView.register(
             ListGameViewCell.self,
@@ -45,11 +46,13 @@ final class GamesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    //MARK: Action
     @objc func addItem() {
         let controller = AddEditViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    //MARK: loadGame
     private func loadGames(filtering: String = "") {
         let festRequest: NSFetchRequest<Game> = Game.fetchRequest()
         let sortDescritor = NSSortDescriptor(
@@ -76,6 +79,7 @@ final class GamesTableViewController: UITableViewController {
         }
     }
     
+    //MARK: Helpers
     func configureStyle() {
         view.backgroundColor = .white
         navigationItem.title = Constants.GameTableView.title.rawValue
@@ -98,6 +102,7 @@ final class GamesTableViewController: UITableViewController {
         navigationItem.searchController = searchController
     }
     
+    //MARK: ConfigTableView
     override func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
@@ -144,7 +149,7 @@ final class GamesTableViewController: UITableViewController {
         }
     }
 }
-
+//MARK: Extensions
 extension GamesTableViewController: NSFetchedResultsControllerDelegate {
     private func controller(
         _ controller: NSFetchedResultsController<NSFetchRequestResult>,
@@ -165,10 +170,8 @@ extension GamesTableViewController: NSFetchedResultsControllerDelegate {
         }
 }
 
-
 extension GamesTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
-        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

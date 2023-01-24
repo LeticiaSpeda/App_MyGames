@@ -11,6 +11,7 @@ final class ConsolesTableViewController: UITableViewController {
     
     var consolesManager = ConsolesManager.shared
     
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(
@@ -26,10 +27,12 @@ final class ConsolesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    //MARK: Actiom
     @objc func addConsole() {
         showAlert(with: nil)
     }
     
+    //MARK: Helpers
     private func loadConsoles() {
         consolesManager.loadConsoler(with: context)
     }
@@ -95,6 +98,7 @@ final class ConsolesTableViewController: UITableViewController {
         present(alert, animated: true)
     }
     
+    //MARK: ConfigTableView
     override func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath

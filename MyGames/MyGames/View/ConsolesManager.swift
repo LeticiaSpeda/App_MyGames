@@ -11,6 +11,7 @@ final class ConsolesManager {
     static let shared =  ConsolesManager()
     var consoles: [Console] = []
     
+    //MARK: ConfigConsole
     func loadConsoler(with context: NSManagedObjectContext) {
         let festRequest: NSFetchRequest<Console> = Console.fetchRequest()
         let sortDescriptor = NSSortDescriptor(

@@ -16,6 +16,7 @@ final class GameViewController: UIViewController {
         }
     }
     
+    //MARK: Components
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -55,6 +56,7 @@ final class GameViewController: UIViewController {
         return view
     }()
     
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
@@ -77,6 +79,7 @@ final class GameViewController: UIViewController {
         
     }
     
+    //MARK: Actions
     @objc func comeBack(){
         let controller = GamesTableViewController()
         let navigation = UINavigationController(rootViewController: controller)
@@ -92,6 +95,7 @@ final class GameViewController: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    //MARK: Helpers
     private func commonInit(){
         configureHierarchy()
         configureConstrainst()

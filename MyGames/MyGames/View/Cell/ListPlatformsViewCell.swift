@@ -9,6 +9,7 @@ import UIKit
 
 final class ListPlatformsViewCell: UITableViewCell, Reusable {
     
+    //MARK: Construtor
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         configureStyle()
@@ -18,9 +19,9 @@ final class ListPlatformsViewCell: UITableViewCell, Reusable {
         fatalError(Constants.Error.mensage.rawValue)
     }
     
+    //MARK: Helpers
     private func configureStyle() {
         selectionStyle = .none
-        accessoryType = .disclosureIndicator
         backgroundColor = .white
     }
 }

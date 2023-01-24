@@ -13,6 +13,7 @@ final class AddEditViewController: UIViewController {
     var consolesManager = ConsolesManager.shared
     var onEdit: ((Game?) -> Void)?
     
+    //MARK: Components
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -156,6 +157,17 @@ final class AddEditViewController: UIViewController {
         return button
     }()
     
+    private func selectPicture(sourceType: UIImagePickerController.SourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        imagePicker.delegate = self
+        imagePicker.navigationBar.tintColor = UIColor(
+            named: Constants.color.game.rawValue
+        )
+        present(imagePicker, animated: true)
+    }
+    
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
@@ -184,6 +196,7 @@ final class AddEditViewController: UIViewController {
         consolesManager.loadConsoler(with: context )
     }
     
+    //MARK: Actions
     @objc func clickImage() {
         let alert = UIAlertController(
             title: Constants.AddEditController.titleAlert.rawValue ,
@@ -278,16 +291,7 @@ final class AddEditViewController: UIViewController {
         handleCancel()
     }
     
-    private func selectPicture(sourceType: UIImagePickerController.SourceType) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = sourceType
-        imagePicker.delegate = self
-        imagePicker.navigationBar.tintColor = UIColor(
-            named: Constants.color.game.rawValue
-        )
-        present(imagePicker, animated: true)
-    }
-    
+    //MARK: Helpers
     private func commonInit() {
         configureHierarchy()
         configureConstraints()
