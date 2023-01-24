@@ -120,4 +120,17 @@ final class ConsolesTableViewController: UITableViewController {
         
         return consolesManager.consoles.count
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let console = consolesManager.consoles[indexPath.row]
+        showAlert(with: console)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            consolesManager.deleteConsole(index: indexPath.row, context: context)
+            loadConsoles()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 }
