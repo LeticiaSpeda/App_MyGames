@@ -11,6 +11,7 @@ final class AddEditViewController: UIViewController {
     
     var game: Game?
     var consolesManager = ConsolesManager.shared
+    var onEdit: ((Game?) -> Void)?
     
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
@@ -237,9 +238,28 @@ final class AddEditViewController: UIViewController {
                 ]
                 game?.console = console
             }
-            
             do {
                 try context.save()
+                navigationController?.popViewController(animated: true)
+            } catch {
+                print(error.localizedDescription)
+            }
+        } else {
+            do {
+                try context.save()
+                
+                
+                game?.title = nameGameTextField.text
+                game?.releadeDate = dataCalendar.date
+                game?.cover = coverImage.image
+                if !platformTextField.text!.isEmpty {
+                    let console = consolesManager.consoles[
+                        pickerView.selectedRow(inComponent: 0)
+                    ]
+                    game?.console = console
+                }
+                
+                onEdit?(game)
                 navigationController?.popViewController(animated: true)
             } catch {
                 print(error.localizedDescription)
@@ -340,3 +360,4 @@ final class AddEditViewController: UIViewController {
         navigationItem.title = Constants.AddEditController.title.rawValue
     }
 }
+
