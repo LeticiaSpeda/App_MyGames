@@ -18,6 +18,16 @@ final class GamesTableViewController: UITableViewController {
         fetchedResultController?.fetchedObjects ?? []
     }
     
+    private lazy var searchController: UISearchController = {
+        let search = UISearchController()
+        search.searchResultsUpdater = self
+//        search.dimsBackgroundDuringPresentation = false
+        search.searchBar.tintColor = .white
+        search.searchBar.barTintColor = .white
+        search.searchBar.delegate = self
+        return search
+    }()
+    
     override func viewDidLoad() {
         tableView.register(
             ListGameViewCell.self,
@@ -40,13 +50,18 @@ final class GamesTableViewController: UITableViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
     
-    private func loadGames() {
+    private func loadGames(filtering: String = "") {
         let festRequest: NSFetchRequest<Game> = Game.fetchRequest()
         let sortDescritor = NSSortDescriptor(
             key: Constants.GameTableView.key.rawValue,
             ascending: true
         )
         festRequest.sortDescriptors = [sortDescritor]
+    
+    if !filtering.isEmpty {
+        let predicate = NSPredicate(format: "title contains[c] %@", argumentArray: [filtering])
+        festRequest.predicate = predicate
+    }
         
         fetchedResultController = NSFetchedResultsController(
             fetchRequest: festRequest, managedObjectContext: context,
@@ -80,6 +95,7 @@ final class GamesTableViewController: UITableViewController {
             style: .plain,
             target: self, action: #selector(addItem)
         )
+        navigationItem.searchController = searchController
     }
     
     override func tableView(
@@ -147,4 +163,21 @@ extension GamesTableViewController: NSFetchedResultsControllerDelegate {
                 tableView.reloadData()
             }
         }
+}
+
+
+extension GamesTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    func updateSearchResults(for searchController: UISearchController) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        loadGames()
+        tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        loadGames(filtering: searchBar.text!)
+        tableView.reloadData()
+    }
 }
