@@ -11,6 +11,7 @@ final class ConsolesManager {
     static let shared =  ConsolesManager()
     var consoles: [Console] = []
     
+    //MARK: ConfigConsole
     func loadConsoler(with context: NSManagedObjectContext) {
         let festRequest: NSFetchRequest<Console> = Console.fetchRequest()
         let sortDescriptor = NSSortDescriptor(
@@ -26,7 +27,7 @@ final class ConsolesManager {
         }
     }
     
-    private func deleteConsole(index: Int, context: NSManagedObjectContext) {
+     func deleteConsole(index: Int, context: NSManagedObjectContext) {
         let console = consoles[index]
         context.delete(console)
         do {

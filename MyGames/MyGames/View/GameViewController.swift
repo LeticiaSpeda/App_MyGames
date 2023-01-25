@@ -9,8 +9,14 @@ import UIKit
 
 final class GameViewController: UIViewController {
     
-    var game: Game?
+    var game: Game? {
+        didSet {
+            name.text = game?.title
+            namePlatform.text = game?.console?.name
+        }
+    }
     
+    //MARK: Components
     private lazy var mainVStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -50,6 +56,7 @@ final class GameViewController: UIViewController {
         return view
     }()
     
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
@@ -69,8 +76,10 @@ final class GameViewController: UIViewController {
         } else {
             imageGame.image = UIImage(named: Constants.image.noCoverFull.rawValue)
         }
+        
     }
     
+    //MARK: Actions
     @objc func comeBack(){
         let controller = GamesTableViewController()
         let navigation = UINavigationController(rootViewController: controller)
@@ -79,10 +88,14 @@ final class GameViewController: UIViewController {
     
     @objc func detailsItem() {
         let controller = AddEditViewController()
+        controller.onEdit = { [weak self] game in
+            self?.game = game
+        }
         controller.game = game
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    //MARK: Helpers
     private func commonInit(){
         configureHierarchy()
         configureConstrainst()

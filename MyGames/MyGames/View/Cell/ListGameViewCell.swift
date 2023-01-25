@@ -9,6 +9,7 @@ import UIKit
 
 final class ListGameViewCell: UITableViewCell, Reusable {
     
+    //MARK: Components
     private lazy var mainHStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
@@ -27,7 +28,6 @@ final class ListGameViewCell: UITableViewCell, Reusable {
     
     private lazy var imageGame: UIImageView = {
         let imgView = UIImageView()
-        //        imgView.contentMode = .scaleAspectFit
         imgView.enableViewCode()
         return imgView
     }()
@@ -49,6 +49,7 @@ final class ListGameViewCell: UITableViewCell, Reusable {
         return label
     }()
     
+    //MARK: Construtor
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -58,6 +59,7 @@ final class ListGameViewCell: UITableViewCell, Reusable {
         fatalError(Constants.Error.mensage.rawValue)
     }
     
+    //MARK: Helpers
     func prepare(with game: Game){
         nameLabel.text = game.title
         consoleLabel.text = game.console?.name

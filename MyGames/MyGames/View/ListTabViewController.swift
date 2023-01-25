@@ -9,12 +9,14 @@ import UIKit
 
 final class ListsTabBarController: UITabBarController {
     
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.screesTabBar()
         configureStyle()
     }
     
+    //MARK: ConfigTabBar
     private func screesTabBar() {
         let listGame = UINavigationController(
             rootViewController: GamesTableViewController()
@@ -35,6 +37,7 @@ final class ListsTabBarController: UITabBarController {
         self.setViewControllers([listGame,listPlatform], animated: true)
     }
     
+    //MARK: Helper
     private func configureStyle() {
         tabBar.tintColor = .systemPink
     }
