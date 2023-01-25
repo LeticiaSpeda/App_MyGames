@@ -11,6 +11,7 @@ final class ConsolesTableViewController: UITableViewController {
     
     var consolesManager = ConsolesManager.shared
     
+    //MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(
@@ -26,10 +27,12 @@ final class ConsolesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    //MARK: Actiom
     @objc func addConsole() {
         showAlert(with: nil)
     }
     
+    //MARK: Helpers
     private func loadConsoles() {
         consolesManager.loadConsoler(with: context)
     }
@@ -95,6 +98,7 @@ final class ConsolesTableViewController: UITableViewController {
         present(alert, animated: true)
     }
     
+    //MARK: ConfigTableView
     override func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
@@ -119,5 +123,18 @@ final class ConsolesTableViewController: UITableViewController {
     ) -> Int{
         
         return consolesManager.consoles.count
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let console = consolesManager.consoles[indexPath.row]
+        showAlert(with: console)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            consolesManager.deleteConsole(index: indexPath.row, context: context)
+            loadConsoles()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }
