@@ -9,47 +9,13 @@ import UIKit
 
 final class ListPlatformsViewCell: UITableViewCell, Reusable {
     
-    private lazy var namee: UILabel = {
-        let label = UILabel()
-        label.text = "title"
-        label.textColor = .black
-        label.enableViewCode()
-        return label
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func commonInit(){
-        configureHierarchy()
-        configureConstraints()
         configureStyle()
     }
     
-    private func configureHierarchy() {
-        addSubview(namee)
-    }
-    
-    private func configureConstraints(){
-        NSLayoutConstraint.activate([
-            namee.topAnchor.constraint(
-                equalTo: topAnchor,
-                constant: 10
-            ),
-            namee.leadingAnchor.constraint(
-                equalTo: leadingAnchor
-            ),
-            namee.bottomAnchor.constraint(
-                equalTo: bottomAnchor,
-                constant: 5
-            )
-        ])
+    required init?(coder: NSCoder) {
+        fatalError(Constants.Error.mensage.rawValue)
     }
     
     private func configureStyle() {

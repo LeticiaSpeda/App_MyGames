@@ -9,7 +9,10 @@ import UIKit
 
 final class ConsolesTableViewController: UITableViewController {
     
+    var consolesManager = ConsolesManager.shared
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.register(
             ListPlatformsViewCell.self,
             forCellReuseIdentifier: ListPlatformsViewCell.identifier
@@ -17,16 +20,28 @@ final class ConsolesTableViewController: UITableViewController {
         configureStyle()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadConsoles()
+        tableView.reloadData()
+    }
+    
     @objc func addConsole() {
-        
+        showAlert(with: nil)
+    }
+    
+    private func loadConsoles() {
+        consolesManager.loadConsoler(with: context)
     }
     
     private func configureStyle() {
         view.backgroundColor = .white
-        navigationItem.title = "Lista de Plataforma"
+        navigationItem.title = Constants.ConsoleTableView.title.rawValue
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "second")
+        appearance.backgroundColor = UIColor(
+            named: Constants.color.platform.rawValue
+        )
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue
@@ -35,10 +50,49 @@ final class ConsolesTableViewController: UITableViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         navigationItem.rightBarButtonItem = .init(
-            image: UIImage(systemName: "plus"),
+            image: UIImage(
+                systemName: Constants.ConsoleTableView.image.rawValue
+            ),
             style: .plain, target: self,
             action: #selector(addConsole)
         )
+    }
+    
+    private func showAlert(with console: Console?) {
+        let title = console == nil ? Constants.ConsoleTableView.addAlert.rawValue : Constants.ConsoleTableView.eddAlert.rawValue
+        let alert = UIAlertController(
+            title: title + Constants.ConsoleTableView.platforms.rawValue,
+            message: nil,
+            preferredStyle: .alert
+        )
+        alert.addTextField { (textField) in
+            textField.placeholder = Constants.ConsoleTableView.name.rawValue
+            if let name = console?.name {
+                textField.text = name
+            }
+        }
+        
+        alert.addAction(
+            UIAlertAction(title: title, style: .default, handler: { (action) in
+                let console = console ?? Console(context: self.context)
+                console.name = alert.textFields?.first?.text
+                do {
+                    try self.context.save()
+                    self.loadConsoles()
+                    self.tableView.reloadData()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }))
+        
+        alert.addAction(UIAlertAction(
+            title: Constants.ConsoleTableView.cancelPlatforms.rawValue,
+            style: .cancel
+        ))
+        alert.view.tintColor = UIColor(
+            named: Constants.color.platform.rawValue
+        )
+        present(alert, animated: true)
     }
     
     override func tableView(
@@ -51,6 +105,8 @@ final class ConsolesTableViewController: UITableViewController {
             for: indexPath
         ) as? ListPlatformsViewCell {
             
+            let console = consolesManager.consoles[indexPath.row]
+            cell.textLabel?.text = console.name
             return cell
         }
         
@@ -62,6 +118,6 @@ final class ConsolesTableViewController: UITableViewController {
         numberOfRowsInSection section: Int
     ) -> Int{
         
-        return 2
+        return consolesManager.consoles.count
     }
 }

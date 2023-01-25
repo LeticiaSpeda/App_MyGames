@@ -4,7 +4,7 @@ O App foi criado com a intenção do usuário poder adicionar jogos com suas inf
 
 ## Imagens
 ---
-## Lauchescreen
+## Lauchescrseen
 
 <img width = "240" src= "https://user-images.githubusercontent.com/85207486/214103985-0b1fa380-396b-47b7-98bd-c9dfb9058a2f.png ">
 

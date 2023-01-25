@@ -35,7 +35,6 @@ final class ListGameViewCell: UITableViewCell, Reusable {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.text = "BATATA"
         label.font = .systemFont(ofSize: 17, weight: .bold)
         label.lineBreakMode = .byWordWrapping
         label.enableViewCode()
@@ -56,7 +55,7 @@ final class ListGameViewCell: UITableViewCell, Reusable {
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constants.Error.mensage.rawValue)
     }
     
     func prepare(with game: Game){
@@ -66,7 +65,7 @@ final class ListGameViewCell: UITableViewCell, Reusable {
         if let image = game.cover as? UIImage {
             imageGame.image = image
         } else {
-            imageGame.image = UIImage(named: "noCover")
+            imageGame.image = UIImage(named: Constants.image.noCover.rawValue)
         }
     }
     

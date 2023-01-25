@@ -13,6 +13,7 @@ final class GamesTableViewController: UITableViewController {
     var fetchedResultController: NSFetchedResultsController<Game>?
     var label = UILabel()
     
+    
     var localGames: [Game] {
         fetchedResultController?.fetchedObjects ?? []
     }
@@ -23,9 +24,15 @@ final class GamesTableViewController: UITableViewController {
             forCellReuseIdentifier: ListGameViewCell.identifier
         )
         configureStyle()
-        label.text = "Você não tem jogos cadastrados"
+        label.text = Constants.GameTableView.mensageTableView.rawValue
         label.textColor = .black.withAlphaComponent(0.4)
         label.textAlignment = .center
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadGames()
+        tableView.reloadData()
     }
     
     @objc func addItem() {
@@ -35,7 +42,10 @@ final class GamesTableViewController: UITableViewController {
     
     private func loadGames() {
         let festRequest: NSFetchRequest<Game> = Game.fetchRequest()
-        let sortDescritor = NSSortDescriptor(key: "title", ascending: true)
+        let sortDescritor = NSSortDescriptor(
+            key: Constants.GameTableView.key.rawValue,
+            ascending: true
+        )
         festRequest.sortDescriptors = [sortDescritor]
         
         fetchedResultController = NSFetchedResultsController(
@@ -53,10 +63,12 @@ final class GamesTableViewController: UITableViewController {
     
     func configureStyle() {
         view.backgroundColor = .white
-        navigationItem.title = "Lista de Jogos"
+        navigationItem.title = Constants.GameTableView.title.rawValue
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "main")
+        appearance.backgroundColor = UIColor(
+            named: Constants.color.game.rawValue
+        )
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue
@@ -64,7 +76,7 @@ final class GamesTableViewController: UITableViewController {
         navigationController?.navigationBar.compactAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationItem.rightBarButtonItem = .init(
-            image: UIImage(systemName: "plus"),
+            image: UIImage(systemName: Constants.GameTableView.image.rawValue),
             style: .plain,
             target: self, action: #selector(addItem)
         )
@@ -100,12 +112,20 @@ final class GamesTableViewController: UITableViewController {
         didSelectRowAt indexPath: IndexPath
     ) {
         let controller = GameViewController()
+        
+        if let games = fetchedResultController?.fetchedObjects {
+            controller.game = games[tableView.indexPathForSelectedRow!.row]
+        }
         navigationController?.pushViewController(controller, animated: true)
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadGames()
-        tableView.reloadData()
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            guard let game = fetchedResultController?.fetchedObjects?[indexPath.row] else { return }
+            context.delete(game) //Deletando do banco de dados
+            loadGames() //Atualizando a controller que olha o banco de dados
+            tableView.reloadData() //Atualiando a lista que olha a controller
+        }
     }
 }
 
@@ -119,6 +139,9 @@ extension GamesTableViewController: NSFetchedResultsControllerDelegate {
             
             switch type {
             case .delete:
+                if let indexPath = indexPath {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
                 break
             default:
                 tableView.reloadData()
