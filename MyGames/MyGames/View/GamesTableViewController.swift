@@ -41,7 +41,10 @@ final class GamesTableViewController: UITableViewController {
     
     private func loadGames() {
         let festRequest: NSFetchRequest<Game> = Game.fetchRequest()
-        let sortDescritor = NSSortDescriptor(key: Constants.GameTableView.key.rawValue, ascending: true)
+        let sortDescritor = NSSortDescriptor(
+            key: Constants.GameTableView.key.rawValue,
+            ascending: true
+        )
         festRequest.sortDescriptors = [sortDescritor]
         
         fetchedResultController = NSFetchedResultsController(
@@ -62,7 +65,9 @@ final class GamesTableViewController: UITableViewController {
         navigationItem.title = Constants.GameTableView.title.rawValue
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: Constants.color.game.rawValue)
+        appearance.backgroundColor = UIColor(
+            named: Constants.color.game.rawValue
+        )
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue

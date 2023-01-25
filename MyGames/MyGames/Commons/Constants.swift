@@ -51,6 +51,12 @@ enum Constants {
         case cover = "Capa"
         case button = "Adicionar"
         case image = "Toque para adicionar a imagem de capa"
+        case titleAlert = "Selecionar poster"
+        case messageAlert = "De onde você quer escolhero poster?"
+        case optionCamera = "Câmera"
+        case optionLibrary = "Biblioteca de fotos"
+        case optionPhoto = "Álbum de fotos"
+        case optionCancel = "Cancelar"
     }
     
     enum color: String {

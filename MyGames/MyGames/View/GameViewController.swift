@@ -104,7 +104,9 @@ final class GameViewController: UIViewController {
         view.backgroundColor = .white
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "main")
+        appearance.backgroundColor = UIColor(
+            named: Constants.color.game.rawValue
+        )
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue

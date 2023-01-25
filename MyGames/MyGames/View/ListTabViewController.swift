@@ -23,9 +23,13 @@ final class ListsTabBarController: UITabBarController {
             rootViewController: ConsolesTableViewController()
         )
         
-        listGame.tabBarItem.image = UIImage(named: Constants.ListTabBar.imageGame.rawValue)
-                                            listGame.title = Constants.ListTabBar.titleGame.rawValue
-                                            listPlatform.tabBarItem.image = UIImage(named: Constants.ListTabBar.imagePlatform.rawValue)
+        listGame.tabBarItem.image = UIImage(
+            named: Constants.ListTabBar.imageGame.rawValue
+        )
+        listGame.title = Constants.ListTabBar.titleGame.rawValue
+        listPlatform.tabBarItem.image = UIImage(
+            named: Constants.ListTabBar.imagePlatform.rawValue
+        )
         listPlatform.title = Constants.ListTabBar.titlePlatform.rawValue
         
         self.setViewControllers([listGame,listPlatform], animated: true)
