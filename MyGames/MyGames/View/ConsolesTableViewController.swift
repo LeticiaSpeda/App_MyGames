@@ -20,14 +20,12 @@ final class ConsolesTableViewController: UITableViewController {
         configureStyle()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadConsoles()
         tableView.reloadData()
-
     }
-
+    
     @objc func addConsole() {
         showAlert(with: nil)
     }
@@ -41,7 +39,9 @@ final class ConsolesTableViewController: UITableViewController {
         navigationItem.title = Constants.ConsoleTableView.title.rawValue
         
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: Constants.color.platform.rawValue)
+        appearance.backgroundColor = UIColor(
+            named: Constants.color.platform.rawValue
+        )
         appearance.titleTextAttributes = [.foregroundColor: UIColor.black]
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.tintColor = .blue
@@ -50,7 +50,9 @@ final class ConsolesTableViewController: UITableViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         navigationItem.rightBarButtonItem = .init(
-            image: UIImage(systemName: Constants.ConsoleTableView.image.rawValue),
+            image: UIImage(
+                systemName: Constants.ConsoleTableView.image.rawValue
+            ),
             style: .plain, target: self,
             action: #selector(addConsole)
         )
@@ -83,8 +85,13 @@ final class ConsolesTableViewController: UITableViewController {
                 }
             }))
         
-        alert.addAction(UIAlertAction(title: Constants.ConsoleTableView.cancelPlatforms.rawValue, style: .cancel))
-        alert.view.tintColor = UIColor(named: Constants.color.platform.rawValue)
+        alert.addAction(UIAlertAction(
+            title: Constants.ConsoleTableView.cancelPlatforms.rawValue,
+            style: .cancel
+        ))
+        alert.view.tintColor = UIColor(
+            named: Constants.color.platform.rawValue
+        )
         present(alert, animated: true)
     }
     
