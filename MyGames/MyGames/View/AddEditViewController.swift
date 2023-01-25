@@ -20,7 +20,7 @@ final class AddEditViewController: UIViewController {
         return stack
     }()
     
-    private lazy var nameGameLabel: UITextField = {
+    private lazy var nameGameTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = Constants.AddEditController.title.rawValue
         tf.textAlignment = .center
@@ -158,6 +158,24 @@ final class AddEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         commonInit()
+        
+        if game != nil {
+            title = Constants.AddEditController.edd.rawValue
+            addButton.setTitle(Constants.AddEditController.change.rawValue, for: .normal)
+            nameGameTextField.text = game?.title
+            if let console = game?.console, let index = consolesManager.consoles.firstIndex(of: console) {
+                platformTextField.text = console.name
+                pickerView.selectRow(index, inComponent: 0, animated: false)
+            }
+            coverImage.image = game?.cover as? UIImage
+            if let releaseData = game?.releadeDate {
+                dataCalendar.date = releaseData
+            }
+            
+            if game?.cover != nil {
+                imageButton.setTitle(nil, for: .normal)
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -210,7 +228,7 @@ final class AddEditViewController: UIViewController {
     @objc func addEditGame() {
         if game == nil {
             game = Game(context: context)
-            game?.title = nameGameLabel.text
+            game?.title = nameGameTextField.text
             game?.releadeDate = dataCalendar.date
             game?.cover = coverImage.image
             if !platformTextField.text!.isEmpty {
@@ -258,7 +276,7 @@ final class AddEditViewController: UIViewController {
     
     private func configureHierarchy() {
         view.addSubview(mainVStack)
-        mainVStack.addArrangedSubview(nameGameLabel)
+        mainVStack.addArrangedSubview(nameGameTextField)
         mainVStack.addArrangedSubview(platformTextField)
         mainVStack.addArrangedSubview(dataYearLabel)
         mainVStack.addArrangedSubview(dataCalendar)
@@ -297,7 +315,7 @@ final class AddEditViewController: UIViewController {
                 equalToConstant: 20
             ),
             
-            nameGameLabel.heightAnchor.constraint(
+            nameGameTextField.heightAnchor.constraint(
                 equalToConstant: 25
             ),
             platformTextField.heightAnchor.constraint(

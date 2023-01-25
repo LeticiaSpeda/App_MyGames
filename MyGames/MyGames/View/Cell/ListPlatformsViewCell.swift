@@ -11,26 +11,11 @@ final class ListPlatformsViewCell: UITableViewCell, Reusable {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        commonInit()
+        configureStyle()
     }
     
     required init?(coder: NSCoder) {
         fatalError(Constants.Error.mensage.rawValue)
-    }
-    
-    private func commonInit(){
-        configureHierarchy()
-        configureConstraints()
-        configureStyle()
-    }
-    
-    private func configureHierarchy() {
-        
-    }
-    
-    private func configureConstraints(){
-        NSLayoutConstraint.activate([
-        ])
     }
     
     private func configureStyle() {
